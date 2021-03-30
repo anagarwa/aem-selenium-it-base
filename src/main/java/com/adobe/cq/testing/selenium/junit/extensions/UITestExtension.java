@@ -16,10 +16,10 @@
 
 package com.adobe.cq.testing.selenium.junit.extensions;
 
-import com.adobe.cq.testing.junit.extensions.SlingClientExtension;
+import com.adobe.cq.testing.selenium.junit.extensions.SlingClientExtension;
 import com.adobe.cq.testing.selenium.junit.annotations.DisableTourConfig;
 import com.adobe.cq.testing.selenium.utils.DisableTour;
-import com.adobe.cq.testing.util.AnnotationHelper;
+import com.adobe.cq.testing.selenium.utils.AnnotationHelper;
 import org.apache.sling.testing.clients.SlingClient;
 import org.junit.jupiter.api.extension.*;
 

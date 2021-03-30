@@ -16,7 +16,7 @@
 
 package com.adobe.cq.testing.selenium.junit.extensions;
 
-import com.adobe.cq.testing.junit.extensions.SlingClientExtension;
+import com.adobe.cq.testing.selenium.junit.extensions.SlingClientExtension;
 import com.adobe.cq.testing.selenium.utils.Coverage;
 import com.codeborne.selenide.WebDriverRunner;
 import org.apache.commons.lang3.StringUtils;

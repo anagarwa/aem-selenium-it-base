@@ -17,7 +17,6 @@
 package com.adobe.cq.testing.selenium.pagewidgets.cq;
 
 import com.adobe.cq.testing.selenium.pageobject.EditorPage;
-import com.adobe.cq.testing.selenium.pagewidgets.Helpers;
 import com.adobe.cq.testing.selenium.pagewidgets.common.ActionComponent;
 import com.adobe.cq.testing.selenium.pagewidgets.common.BaseComponent;
 import com.adobe.cq.testing.selenium.pagewidgets.coral.Dialog;
@@ -25,6 +24,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.adobe.cq.testing.selenium.pagewidgets.Helpers.clickBaseComponentAction;
 import static com.adobe.cq.testing.selenium.pagewidgets.Helpers.clickDialogAction;
 import static com.adobe.cq.testing.selenium.utils.ElementUtils.clickableClick;
 import static com.codeborne.selenide.Selenide.$;
@@ -42,6 +42,7 @@ public class EditableToolbar extends BaseComponent {
     private SelenideElement copyButton = EditableToolbarAction.COPY.getButton();
     private SelenideElement cutButton = EditableToolbarAction.CUT.getButton();
     private SelenideElement pasteButton = EditableToolbarAction.PASTE.getButton();
+    private SelenideElement panelSelectButton = EditableToolbarAction.PANEL_SELECT.getButton();
     private ActionComponent<Dialog>  deleteButton = new ActionComponent(EditableToolbarAction.DELETE.getButton(), () -> new Dialog( "coral-dialog"), false);
     private SelenideElement groupButton = EditableToolbarAction.GROUP.getButton();
     private ActionComponent<StylesSelector> stylesButton = new ActionComponent(EditableToolbarAction.STYLE.getButton(), () -> new StylesSelector(StylesSelector.Variant.COMPONENT), false);
@@ -81,6 +82,8 @@ public class EditableToolbar extends BaseComponent {
     public SelenideElement getCopyButton() { return copyButton; }
     public SelenideElement getCutButton() { return cutButton; }
     public SelenideElement getPasteButton() { return pasteButton; }
+    public SelenideElement getPanelSelectButton() { return panelSelectButton; }
+
     public SelenideElement getDeleteButton() { return deleteButton.element(); }
     public SelenideElement getGroupButton() { return groupButton; }
     public SelenideElement getStylesButton() { return stylesButton.element(); }
@@ -111,13 +114,13 @@ public class EditableToolbar extends BaseComponent {
         return (T) editorPage;
     }
 
-    public InsertComponentDialog clickInsertComponent() { return Helpers.clickDialogAction(insertButton); }
-    public Dialog clickConfigure() { return Helpers.clickDialogAction(configureButton); }
-    public Dialog clickDelete() { return Helpers.clickDialogAction(deleteButton); }
+    public InsertComponentDialog clickInsertComponent() { return clickDialogAction(insertButton); }
+    public Dialog clickConfigure() { return clickDialogAction(configureButton); }
+    public Dialog clickDelete() { return clickDialogAction(deleteButton); }
 
-    public PolicyDialog clickPolicy() { return Helpers.clickDialogAction(policyButton); }
-    public Dialog clickUnlockStructure() { return Helpers.clickDialogAction(unlockStructureButton); }
-    public Dialog clickLockStructure() { return Helpers.clickDialogAction(lockStructureButton); }
+    public PolicyDialog clickPolicy() { return clickDialogAction(policyButton); }
+    public Dialog clickUnlockStructure() { return clickDialogAction(unlockStructureButton); }
+    public Dialog clickLockStructure() { return clickDialogAction(lockStructureButton); }
 
     public EditableToolbar clickLayout() { return clickEditableToolbarAction(layoutButton); }
     public EditableToolbar clickClose() { return clickEditableToolbarAction(closeButton); }
@@ -126,6 +129,7 @@ public class EditableToolbar extends BaseComponent {
     public EditableToolbar clickParent() { return clickEditableToolbarAction(parentButton); }
     public EditableToolbar clickUnhide() { return clickEditableToolbarAction(unhideButton); }
     public EditableToolbar clickReset() { return clickEditableToolbarAction(resetButton); }
+    public EditableToolbar clickPanelSelect() { return clickEditableToolbarAction(panelSelectButton); }
 
     protected EditableToolbar clickEditableToolbarAction(SelenideElement button) {
         clickableClick(button);
@@ -133,7 +137,7 @@ public class EditableToolbar extends BaseComponent {
         return this;
     }
 
-    public StylesSelector clickStyles() { return Helpers.clickBaseComponentAction(stylesButton); }
+    public StylesSelector clickStyles() { return clickBaseComponentAction(stylesButton); }
     public EditableToolbar closeStyles(StylesSelector stylesSelector) {
         if (stylesSelector != null && stylesSelector.element().is(Condition.visible)) {
             clickableClick(stylesButton.element());
@@ -165,7 +169,7 @@ public class EditableToolbar extends BaseComponent {
     public enum EditableToolbarAction {
         INSERT, CONFIGURE, PARENT, EDIT, LAYOUT, COPY, CUT, PASTE, DELETE, GROUP, STYLE,
         POLICY, STRUCTURE_OFF, STRUCTURE_ON,
-        NEWLINE, HIDE, UNHIDE, AMOUNT, RESET, CLOSE;
+        NEWLINE, HIDE, UNHIDE, AMOUNT, RESET, CLOSE, PANEL_SELECT;
 
         public String getSelector() {
             return "button[data-action='" + name() + "']";
